@@ -1,0 +1,9 @@
+package com.example.baseproject.ui.screens
+
+sealed class AppScreen(val route : String) {
+    object Welcome : AppScreen("Welcome_screen")
+    object AnimalListScreen : AppScreen("animal_list_screen")
+    object AnimalDetailScreen : AppScreen("animal_detail_screen/{animalId}") {
+        fun createRoute(animalId: String) = "animal_detail_screen/$animalId"
+    }
+}
