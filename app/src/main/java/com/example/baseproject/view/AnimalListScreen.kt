@@ -37,5 +37,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberAsyncImagePainter
+import com.example.baseproject.model.Animal
+import com.example.baseproject.ui.screens.AppScreen
+import com.example.baseproject.viewmodel.AnimalViewModel
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AnimalListScreen (
+    navController: NavController,
+    viewModel: AnimalViewModel = viewModel()
+){}

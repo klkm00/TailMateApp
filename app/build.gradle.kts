@@ -83,5 +83,12 @@ dependencies {
     // Dependencia retro fit- Chris
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Dependencias del Viewmodel para los composable- chris
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    // para cargar imagenes de URL con coil- chris
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    // para navigation - Chris
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
 
 }
