@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 
-import com.example.baseproject.view.AppNavigation 
+import com.example.app.view.AppNavigation
 import com.example.baseproject.ui.screens.WelcomeScreen
 import com.example.baseproject.ui.theme.BaseAndroidProjectTheme
 

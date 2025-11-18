@@ -1,11 +1,13 @@
-package com.example.app.view
+package com.example.baseproject.view
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.Navtype
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.baseproject.ui.screens.AppScreen
 import androidx.navigation.navArgument
+import com.example.baseproject.ui.screens.WelcomeScreen
 
 
 @Composable
@@ -17,7 +19,7 @@ fun AppNavigation() {
         startDestination = AppScreen.AnimalListScreen.route
 ){
     composable(route  = AppScreen.AnimalListScreen.route){
-        homeScreen(navController = navController)
+        homeScreen (navController = navController)
         
     }
 }
