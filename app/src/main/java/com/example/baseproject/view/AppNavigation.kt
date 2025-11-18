@@ -1,11 +1,11 @@
 package com.example.baseproject.view
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.baseproject.ui.screens.AppScreen
 
 @Composable
@@ -31,12 +31,15 @@ fun AppNavigation() {
         }
         composable(route = AppScreen.AnimalListScreen.route) {
             AnimalListScreen(navController = navController)
-
+        }
+        composable(
+            route = AppScreen.AnimalDetailScreen.route,
+            arguments = listOf(navArgument("animalId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val animalId = backStackEntry.arguments?.getString("animalId")
+            if (animalId != null) {
+                AnimalDetailScreen(animalId = animalId.toInt())
+            }
         }
     }
-}
-
-@Composable
-fun AnimalListScreen(navController: NavHostController) {
-    Text("Animal List Screen")
 }
