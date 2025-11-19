@@ -9,16 +9,16 @@ import com.example.baseproject.data.AnimalRepository
 import com.example.baseproject.model.Animal
 import kotlinx.coroutines.launch
 
-data class  AnimalListUiState(
+data class AnimalListUiState(
     val animales: List<Animal> = emptyList(),
     val isLoading: Boolean = false,
-    val error : String? = null
+    val error: String? = null
 )
 
 data class AnimalDetailUiState(
     val animal: Animal? = null,
     val isLoading: Boolean = false,
-    val error : String? = null
+    val error: String? = null
 )
 
 class AnimalViewModel(
@@ -49,118 +49,179 @@ class AnimalViewModel(
     )
 
     fun cargarListaAnimales() {
-        if (listUiState.animales.isNotEmpty()) return 
+        if (listUiState.animales.isNotEmpty()) return
 
-        listUiState = AnimalListUiState(isLoading = true)
+        // Usamos copy para mantener el estado previo mientras carga
+        listUiState = listUiState.copy(isLoading = true, error = null)
 
         viewModelScope.launch {
             try {
                 val response = repository.getAnimalList()
-                listUiState = AnimalListUiState(animales = response.data)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    animales = response.data,
+                    error = null
+                )
             } catch (e: Exception) {
-                listUiState = AnimalListUiState(error = e.message)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    error = e.message
+                )
             }
         }
     }
 
     fun limpiarFiltros() {
-        listUiState = AnimalListUiState(isLoading = true)
+        listUiState = listUiState.copy(isLoading = true, error = null)
         viewModelScope.launch {
             try {
                 val response = repository.getAnimalList()
-                listUiState = AnimalListUiState(animales = response.data)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    animales = response.data,
+                    error = null
+                )
             } catch (e: Exception) {
-                listUiState = AnimalListUiState(error = e.message)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    error = e.message
+                )
             }
         }
     }
 
     fun filtrarPorTipo(tipo: String) {
-        listUiState = AnimalListUiState(isLoading = true)
+        listUiState = listUiState.copy(isLoading = true, error = null)
         viewModelScope.launch {
             try {
                 val response = repository.getAnimalsByType(tipo.lowercase())
-                listUiState = AnimalListUiState(animales = response.data)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    animales = response.data,
+                    error = null
+                )
             } catch (e: Exception) {
-                listUiState = AnimalListUiState(error = "No se encontraron animales de tipo $tipo")
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    error = "No se encontraron animales de tipo $tipo"
+                )
             }
         }
     }
 
     fun filtrarPorRegion(region: String) {
-        listUiState = AnimalListUiState(isLoading = true)
+        listUiState = listUiState.copy(isLoading = true, error = null)
         viewModelScope.launch {
             try {
                 val response = repository.getAnimalsByRegion(region.trim())
-                listUiState = AnimalListUiState(animales = response.data)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    animales = response.data,
+                    error = null
+                )
             } catch (e: Exception) {
-                listUiState = AnimalListUiState(error = "Error al filtrar región: ${e.message}")
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    error = "Error al filtrar región: ${e.message}"
+                )
             }
         }
     }
 
     // Búsqueda Inteligente: Usa el mapa para detectar regiones por nombre
     fun filtrarPorComuna(termino: String) {
-        listUiState = AnimalListUiState(isLoading = true)
-        
+        listUiState = listUiState.copy(isLoading = true, error = null)
+
         // Convertimos a minúsculas y quitamos espacios
         val terminoLimpio = termino.lowercase().trim()
-        
+
         // Revisamos si lo que escribiste coincide con alguna Región del mapa
         val regionId = regionesMap[terminoLimpio]
 
         viewModelScope.launch {
             try {
-                if (regionId != null) {
+                val response = if (regionId != null) {
                     // ¡Es una región! Usamos el ID (ej: "santiago" -> "7")
-                    val response = repository.getAnimalsByRegion(regionId)
-                    listUiState = AnimalListUiState(animales = response.data)
+                    repository.getAnimalsByRegion(regionId)
                 } else {
                     // Si no es región, buscamos por Comuna tal cual
-                    val response = repository.getAnimalsByComuna(termino.trim())
-                    listUiState = AnimalListUiState(animales = response.data)
+                    repository.getAnimalsByComuna(termino.trim())
                 }
+                
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    animales = response.data,
+                    error = null
+                )
             } catch (e: Exception) {
-                listUiState = AnimalListUiState(error = "No se encontraron resultados para: $termino")
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    error = "No se encontraron resultados para: $termino"
+                )
             }
         }
     }
 
     fun filtrarPorEstado(estado: String) {
-        listUiState = AnimalListUiState(isLoading = true)
+        listUiState = listUiState.copy(isLoading = true, error = null)
         viewModelScope.launch {
             try {
                 val response = repository.getAnimalsByEstado(estado.lowercase())
-                listUiState = AnimalListUiState(animales = response.data)
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    animales = response.data,
+                    error = null
+                )
             } catch (e: Exception) {
-                listUiState = AnimalListUiState(error = "No se encontraron animales con estado '$estado'. (${e.message})")
+                listUiState = listUiState.copy(
+                    isLoading = false,
+                    error = "No se encontraron animales con estado '$estado'. (${e.message})"
+                )
             }
         }
     }
 
     var detailUiState by mutableStateOf(AnimalDetailUiState())
-       private set
+        private set
 
     fun cargaDetalleAnimal(id: Int) {
-        detailUiState = AnimalDetailUiState(isLoading = true)
+        detailUiState = detailUiState.copy(isLoading = true, error = null)
 
         viewModelScope.launch {
+            // Intentamos buscar primero en la lista local
             val animal = listUiState.animales.find { it.id == id }
-            
+
             if (animal != null) {
-                detailUiState = AnimalDetailUiState(animal = animal)
+                detailUiState = detailUiState.copy(
+                    isLoading = false,
+                    animal = animal,
+                    error = null
+                )
             } else {
+                // Si no está en local, recargamos la lista (o podríamos llamar al endpoint de detalle si existiera)
                 try {
                     val response = repository.getAnimalList()
-                    listUiState = AnimalListUiState(animales = response.data)
+                    // Opcional: actualizamos también la lista principal
+                    // listUiState = listUiState.copy(animales = response.data)
+                    
                     val animalNuevo = response.data.find { it.id == id }
                     if (animalNuevo != null) {
-                        detailUiState = AnimalDetailUiState(animal = animalNuevo)
+                        detailUiState = detailUiState.copy(
+                            isLoading = false,
+                            animal = animalNuevo,
+                            error = null
+                        )
                     } else {
-                        detailUiState = AnimalDetailUiState(error = "Animal no encontrado")
+                        detailUiState = detailUiState.copy(
+                            isLoading = false,
+                            error = "Animal no encontrado"
+                        )
                     }
                 } catch (e: Exception) {
-                    detailUiState = AnimalDetailUiState(error = e.message)
+                    detailUiState = detailUiState.copy(
+                        isLoading = false,
+                        error = e.message
+                    )
                 }
             }
         }
