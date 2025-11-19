@@ -26,18 +26,11 @@ import com.example.baseproject.viewmodel.LoginViewModel
 
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit // Callback para navegar cuando el login es exitoso
+    onLoginSuccess: () -> Unit, // Callback para navegar cuando el login es exitoso
+    onNavigateToRegister: () -> Unit
 ) {
 
-    val context = LocalContext.current
-    val viewModel: LoginViewModel = viewModel(
-        factory = object : ViewModelProvider.Factory {
-            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
-                return LoginViewModel(UserRepository(context)) as T
-            }
-        }
-    )
-
+    val viewModel: LoginViewModel = viewModel()
 
     //Esto hace que se observe el estado en que se encuentra el login
     val uiState by viewModel.uiState.collectAsState()
@@ -149,12 +142,12 @@ fun LoginScreen(
         //Boton secundario (Registrarse)
         OutlinedButton(
             onClick = {
-                viewModel.register(username, password)
+                onNavigateToRegister()
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            enabled = uiState !is LoginUiState.Loading
+            enabled = true
         ){
             Text("Registrarse", fontSize = 16.sp)
         }

@@ -1,6 +1,7 @@
 package com.example.baseproject.ui.screens
 
 sealed class AppScreen(val route : String) {
+    object RegisterScreen : AppScreen("register_screen")
     object Welcome : AppScreen("Welcome_screen")
     object LoginScreen : AppScreen("login_screen")
     object AnimalListScreen : AppScreen("animal_list_screen")
