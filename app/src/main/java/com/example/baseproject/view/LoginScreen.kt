@@ -122,7 +122,7 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Este es el botón principal el cual es para ingresar
+        // Este es el botón principal el cual es para ingresarasda
 
         Button(
             onClick = {
