@@ -19,7 +19,7 @@ class AnimalRepository(
         return api.fetchAnimalsByType(tipo)
     }
 
-    // Filtra por región
+    // Filtra por regiónsd
     suspend fun getAnimalsByRegion(region: String): AnimalListResponse {
         return api.fetchAnimalsByRegion(region)
     }
