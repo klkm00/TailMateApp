@@ -55,7 +55,7 @@ fun AnimalListScreen (
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Adopta un Amigo") },
+                title = { Text("TailMate") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
@@ -81,7 +81,7 @@ fun AnimalListScreen (
                 keyboardActions = KeyboardActions(
                     onSearch = {
                         if (comunaSearch.isNotBlank()) {
-                            selectedType = "Todos" // Resetear otros filtros visualmente
+                            selectedType = "Todos"
                             selectedEstado = "Todos"
                             viewModel.filtrarPorComuna(comunaSearch)
                         } else {
@@ -91,7 +91,7 @@ fun AnimalListScreen (
                 )
             )
 
-            // 2. Filtro por TIPO
+            // 2. Filtro por tipo
             Text(
                 text = "Filtrar por Tipo:",
                 style = MaterialTheme.typography.labelMedium,
@@ -135,7 +135,7 @@ fun AnimalListScreen (
                         onClick = {
                             selectedEstado = estado
                             selectedType = "Todos" // Resetear tipo
-                            comunaSearch = "" // Resetear búsqueda
+                            comunaSearch = "" // esto hacc que se reseta la comuna
                             if (estado == "Todos") {
                                 viewModel.limpiarFiltros()
                             } else {
@@ -149,7 +149,7 @@ fun AnimalListScreen (
             
             Divider()
 
-            // 4. Contenido Principal (Lista o Error)
+
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center

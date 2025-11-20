@@ -33,8 +33,8 @@ fun AnimalCard(animal: Animal, onClick: () -> Unit) {
                 contentDescription = "Imagen de ${animal.nombre}",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight(), // La altura se adapta a la imagen
-                contentScale = ContentScale.FillWidth // La imagen llena el ancho sin recortarse
+                    .wrapContentHeight(), // se adapta a la imagen
+                contentScale = ContentScale.FillWidth // sin recortarse
             )
             Column(
                 modifier = Modifier.padding(16.dp)

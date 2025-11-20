@@ -25,7 +25,7 @@ import com.example.baseproject.viewmodel.LoginViewModel
 @Composable
 fun RegisterScreen (
     navController: NavController,
-    viewModel: LoginViewModel //el view model del login
+    viewModel: LoginViewModel
 ){
     val uiState by viewModel.uiState.collectAsState()
 
@@ -83,12 +83,12 @@ fun RegisterScreen (
                 modifier = Modifier.padding(bottom = 32.dp)
             )
 
-            // --- CAMPO NOMBRE ---
+            // pal nombre
             OutlinedTextField(
                 value = name,
                 onValueChange = {
                     name = it
-                    viewModel.resetState() // Limpiar errores al escribir
+                    viewModel.resetState() // Limpia errores
                 },
                 label = { Text("Nombre") },
                 modifier = Modifier
@@ -97,7 +97,7 @@ fun RegisterScreen (
                 singleLine = true
             )
 
-            // --- CAMPO CONTRASEÑA ---
+            // contraseña
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -118,7 +118,7 @@ fun RegisterScreen (
                 singleLine = true
             )
 
-            // --- CAMPO CONFIRMAR CONTRASEÑA ---
+            // confirma contraseña
             OutlinedTextField(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
@@ -139,7 +139,7 @@ fun RegisterScreen (
                 singleLine = true
             )
 
-            // Mensaje de error visual si las contraseñas no coinciden
+            //error
             if (password != confirmPassword && confirmPassword.isNotEmpty()) {
                 Text(
                     text = "Las contraseñas no coinciden",
@@ -148,12 +148,12 @@ fun RegisterScreen (
                 )
             }
 
-            // Loading Indicator si está cargando
+            // Loading
             if (uiState is LoginUiState.Loading) {
                 CircularProgressIndicator(modifier = Modifier.padding(bottom = 16.dp))
             }
 
-            // --- BOTÓN REGISTRAR ---
+            // btn registrar
             Button(
                 onClick = {
                     // Solo llamamos al ViewModel si las contraseñas coinciden
@@ -178,7 +178,7 @@ fun RegisterScreen (
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Botón extra para cancelar (opcional, pero buena práctica)
+            // Btn registrar
             TextButton(onClick = { navController.popBackStack() }) {
                 Text("Cancelar")
             }

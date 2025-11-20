@@ -128,23 +128,23 @@ class AnimalViewModel(
         }
     }
 
-    // Búsqueda Inteligente: Usa el mapa para detectar regiones por nombre
+
     fun filtrarPorComuna(termino: String) {
         listUiState = listUiState.copy(isLoading = true, error = null)
 
-        // Convertimos a minúsculas y quitamos espacios
+        //quitamos espacios
         val terminoLimpio = termino.lowercase().trim()
 
-        // Revisamos si lo que escribiste coincide con alguna Región del mapa
+        // Revisamos  Región del mapa
         val regionId = regionesMap[terminoLimpio]
 
         viewModelScope.launch {
             try {
                 val response = if (regionId != null) {
-                    // ¡Es una región! Usamos el ID (ej: "santiago" -> "7")
+
                     repository.getAnimalsByRegion(regionId)
                 } else {
-                    // Si no es región, buscamos por Comuna tal cual
+
                     repository.getAnimalsByComuna(termino.trim())
                 }
                 
@@ -198,11 +198,10 @@ class AnimalViewModel(
                     error = null
                 )
             } else {
-                // Si no está en local, recargamos la lista (o podríamos llamar al endpoint de detalle si existiera)
+
                 try {
                     val response = repository.getAnimalList()
-                    // Opcional: actualizamos también la lista principal
-                    // listUiState = listUiState.copy(animales = response.data)
+
                     
                     val animalNuevo = response.data.find { it.id == id }
                     if (animalNuevo != null) {

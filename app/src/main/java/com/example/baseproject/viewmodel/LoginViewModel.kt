@@ -15,10 +15,10 @@ import androidx.lifecycle.AndroidViewModel
 
 
 sealed class LoginUiState {
-    object Idle : LoginUiState()               // Esperando acción del usuario
-    object Loading : LoginUiState()            // Procesando (ruedita girando)
-    data class Success(val user: User) : LoginUiState() // ¡Login correcto!
-    data class Error(val message: String) : LoginUiState() // Hubo un problema
+    object Idle : LoginUiState()               // Esperando
+    object Loading : LoginUiState()            // cargando
+    data class Success(val user: User) : LoginUiState() // correcto
+    data class Error(val message: String) : LoginUiState() // problema
 
     object RegisterSuccess : LoginUiState()// Registro exitoso
 
