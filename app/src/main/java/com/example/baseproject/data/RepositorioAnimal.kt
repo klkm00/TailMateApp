@@ -9,7 +9,7 @@ class AnimalRepository(
     private val api: AnimalApiService = NetworkModule.api
 ) {
 
-    //Trae la lista completa de animales
+    //Trae la lista completa de animales aasas
     suspend fun getAnimalList(): AnimalListResponse {
         return api.fetchAnimalList()
     }
