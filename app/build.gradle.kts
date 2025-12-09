@@ -31,12 +31,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
@@ -89,6 +89,20 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
     // para navigation - Chris
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+
+    //para testing unitario
+    //esto prueba corrutinas (ejemplo delay 2000)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    //para simular objetos como mocks (del repositorio)
+    testImplementation("io.mockk:mockk:1.13.8")
+    //esto usa aplication context
+    testImplementation("androidx.test:core:1.5.0")
+    //nose para que era esta
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    // aqui se pondra una dependencia ya que el userRepo maneja persistencia de la sesion
+    testImplementation("org.robolectric:robolectric:4.11.1")
 
 
 }

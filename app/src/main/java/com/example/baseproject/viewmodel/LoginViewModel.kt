@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import androidx.lifecycle.AndroidViewModel
+import com.example.baseproject.data.AnimalRepository
 
 
 sealed class LoginUiState {
@@ -24,8 +25,8 @@ sealed class LoginUiState {
 
 }
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository = UserRepository(application.applicationContext)
+class LoginViewModel(application: Application , //esto de aqui va a llamar los valores por defecto
+                     private val repository: UserRepository = UserRepository(application.applicationContext)) : AndroidViewModel(application) { // Esto crea objetos tipo mocks para hacer las pruebas
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
