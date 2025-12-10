@@ -1,4 +1,6 @@
 package com.example.baseproject.model
+import android.net.Uri
+
 
 data class PerfilDeUsuario(
     val id: Int,

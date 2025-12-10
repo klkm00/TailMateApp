@@ -1,15 +1,21 @@
 package com.example.baseproject.data.remote
+import android.net.Uri
+import com.example.baseproject.model.PerfilDeUsuario
 
 class PerfilRepositorio {
+
+    // Perfil actual en memoria
     private var perfilActual = PerfilDeUsuario(
-    id = 1,
-    nombre = "Usuario",
-    imagenUri = null
+        id = 1,
+        nombre = "Usuario",
+        imagenUri = null
     )
-}
 
-fun getProfile(): PerfilDeUsuario = perfilActual
+    // Devuelve el perfil actual
+    fun getProfile(): PerfilDeUsuario = perfilActual
 
-fun updateImage(uri: Uri?) {
-perfilActual = perfilActual.copy(imagenUri = uri)
+    // Actualiza solo la imagen, manteniendo id y nombre
+    fun updateImage(uri: Uri?) {
+        perfilActual = perfilActual.copy(imagenUri = uri)
+    }
 }
