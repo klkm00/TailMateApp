@@ -5,6 +5,8 @@ sealed class AppScreen(val route : String) {
     object Welcome : AppScreen("Welcome_screen")
     object LoginScreen : AppScreen("login_screen")
     object AnimalListScreen : AppScreen("animal_list_screen")
+
+    object PerfilScreen : AppScreen("perfil_screen")
     object AnimalDetailScreen : AppScreen("animal_detail_screen/{animalId}") {
         fun createRoute(animalId: String) = "animal_detail_screen/$animalId"
 

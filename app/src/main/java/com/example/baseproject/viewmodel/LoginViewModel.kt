@@ -24,8 +24,8 @@ sealed class LoginUiState {
 
 }
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository = UserRepository(application.applicationContext)
+class LoginViewModel(application: Application,
+    private val repository: UserRepository = UserRepository(application.applicationContext)) : AndroidViewModel(application) { // Esto crea objetos tipo mocks para hacer las pruebas
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()

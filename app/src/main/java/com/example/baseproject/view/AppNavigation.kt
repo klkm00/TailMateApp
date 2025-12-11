@@ -9,6 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.baseproject.ui.screens.AppScreen
 import com.example.baseproject.viewmodel.LoginViewModel
+import com.example.baseproject.view.screens.PerfilScreen
+import com.example.baseproject.viewmodel.PerfilViewModel
 
 @Composable
 fun AppNavigation() {
@@ -45,6 +47,11 @@ fun AppNavigation() {
         composable(route = AppScreen.AnimalListScreen.route) {
             AnimalListScreen(navController = navController)
         }
+
+        composable(route = AppScreen.PerfilScreen.route) {
+            PerfilScreen(viewModel = viewModel())
+        }
+
         composable(
             route = AppScreen.AnimalDetailScreen.route,
             arguments = listOf(navArgument("animalId") { type = NavType.StringType })
