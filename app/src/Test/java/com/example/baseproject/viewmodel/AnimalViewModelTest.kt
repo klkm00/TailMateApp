@@ -136,6 +136,9 @@ class AnimalViewModelTest {
 
         // GIV -> simula el error de la API
         val errorMessage = "Error de red simulado"
+        
+        // CORRECCIÓN: Configuramos el mock para que lance una excepción
+        coEvery { mockRepository.getAnimalList() } throws IOException(errorMessage)
 
         // W -> carga la lista de animales
         viewModel.cargarListaAnimales()
